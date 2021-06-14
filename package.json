@@ -5,9 +5,13 @@
   "main": "index.js",
   "scripts": {
     "build": "cd server && node server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd server && npm install"
   },
   "keywords": [],
   "author": "Nikita Tsyklinskiy",
-  "license": "ISC"
+  "license": "ISC",
+  "engines" : {
+    "node": "16.1.0",
+    "npm": "7.13.0"
+  }
 }
