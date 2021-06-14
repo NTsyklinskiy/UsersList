@@ -1,1 +1,1 @@
-web: node server/server.jsnp
+web: node server/server.js
