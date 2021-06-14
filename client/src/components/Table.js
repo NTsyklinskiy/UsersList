@@ -5,6 +5,7 @@ import { useMutation } from '@apollo/client';
 import { BLOCK_USERS, DELETE_USERS, UNBLOCK_USERS } from '../utils/graphql';
 import useCheckbox from '../hooks/useCheckbox';
 import { Checkbox } from './Checkbox';
+import { useStore } from '../store/store';
 
 function conversionDate(data) {
   let date = new Date(+data);
@@ -19,6 +20,8 @@ function keyId(checkeds){
 }
 
 export const TableUsers = ({data, refetchUser,refetchAllUsers}) => {
+    const [{ auth: {user: {id}} }] = useStore();
+    console.log(id);
     const [users, setUsers] = useState([])
 
     const {checkeds, handleChange, handleChangeAll, handleChangeNo} = useCheckbox(users)
@@ -62,7 +65,11 @@ export const TableUsers = ({data, refetchUser,refetchAllUsers}) => {
     const handlerDelete = async () => {
       try {
         const deleteId = keyId(checkeds)
+        if(deleteId.some(e=> e === id)){
+          window.localStorage.removeItem('token')
+        }
 
+        
         await deleteUsers({
           variables:  {
             usersIds:deleteId,

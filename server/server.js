@@ -27,7 +27,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const corsOptions = {
-  origin: process.env.FRONTEND_URL,
+  // origin: process.env.FRONTEND_URL,
   credentials: true,
 };
 app.use(cors(corsOptions));
@@ -40,7 +40,7 @@ server.applyMiddleware({ app });
 const httpServer = http.createServer(app);
 server.installSubscriptionHandlers(httpServer);
 
-const PORT = process.env.PORT || 3030;
+const PORT = process.env.PORT || 3000;
 
 
 httpServer.listen(PORT, () => {
